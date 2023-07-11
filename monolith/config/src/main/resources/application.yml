@@ -1,0 +1,36 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  config:
+    use-legacy-processing: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/lol?user=postgres&password=postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+        default_schema: ranking
+        enable_lazy_load_no_trans: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        use_sql_comment: false
+        format_sql: false
+        type: trace
+  liquibase:
+    change-log: classpath:/db/changelog/db.changeLog-ranking-master.xml
+    default-schema: public
+    enabled: true
+    #clear-checksums: false
+    user: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/lol?user=postgres&password=postgres
+
+
+
+localdb:
+  postgres:
+    driver:
+      enabled: true
