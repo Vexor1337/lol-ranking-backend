@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="create-table-players" author="porek" context="ranking">
+        <createTable tableName="players" schemaName="ranking">
+            <column name="player_id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="summoner_name" type="varchar(255)"/>
+            <column name="highest_rank" type="varchar(255)"/>
+            <column name="highest_rank_date" type="varchar(255)"/>
+            <column name="current_elo" type="int"/>
+            <column name="highest_elo" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-rank_dict" author="porek" context="ranking">
+        <createTable tableName="rank_dict" schemaName="ranking">
+            <column name="rank_id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="rank_name" type="varchar(255)"/>
+            <column name="division" type="varchar(255)"/>
+            <column name="elo" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-players_ranks" author="porek" context="ranking">
+        <createTable tableName="players_ranks" schemaName="ranking">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="lp" type="int"/>
+            <column name="last_check_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="rank_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="player_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-add-fk-keys" author="porek" context="ranking">
+        <addForeignKeyConstraint baseTableName="players_ranks"
+                                 baseColumnNames="rank_id"
+                                 constraintName="FK_RankDict_RankId"
+                                 referencedTableName="rank_dict"
+                                 referencedColumnNames="rank_id"/>
+        <addForeignKeyConstraint baseTableName="players_ranks"
+                                 baseColumnNames="player_id"
+                                 constraintName="FK_Player_PlayerId"
+                                 referencedTableName="players"
+                                 referencedColumnNames="player_id"/>
+    </changeSet>
+
+</databaseChangeLog>

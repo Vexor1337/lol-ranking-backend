@@ -32,8 +32,10 @@ dependencies {
     implementation(group= "com.oracle.database.jdbc", name= "ojdbc8", version="23.2.0.0")
     implementation(group= "com.oracle.database.jdbc", name= "ucp", version="23.2.0.0")
 
-    implementation("io.springfox:springfox-boot-starter:3.0.0")
-    implementation ("javax.servlet:javax.servlet-api:4.0.1")
+    implementation (group= "org.springdoc", name= "springdoc-openapi-starter-webmvc-ui", version= "2.0.2")
+
+    //implementation("io.springfox:springfox-boot-starter:3.0.0")
+    //implementation ("javax.servlet:javax.servlet-api:4.0.1")
 
     implementation("org.liquibase:liquibase-core:4.22.0")
     implementation("org.liquibase:liquibase-gradle-plugin:2.2.0")
