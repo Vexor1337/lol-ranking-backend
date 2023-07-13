@@ -6,5 +6,8 @@ include(
     "monolith:ranking:ports-input",
     "monolith:ranking:ports-output",
 
+    "monolith:commons",
+    "monolith:commons:arrow",
+
     "monolith:config",
 )

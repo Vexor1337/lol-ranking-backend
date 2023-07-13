@@ -32,6 +32,12 @@ dependencies {
     implementation(group= "com.oracle.database.jdbc", name= "ojdbc8", version="23.2.0.0")
     implementation(group= "com.oracle.database.jdbc", name= "ucp", version="23.2.0.0")
 
+    implementation(group = "io.github.openfeign", name = "feign-core", version = "11.8")
+    implementation(group = "io.github.openfeign", name = "feign-gson", version = "11.8")
+    implementation(group = "io.github.openfeign", name = "feign-okhttp", version = "11.8")
+    implementation(group = "io.github.openfeign", name = "feign-slf4j", version = "11.8")
+
+
     implementation (group= "org.springdoc", name= "springdoc-openapi-starter-webmvc-ui", version= "2.0.2")
 
     //implementation("io.springfox:springfox-boot-starter:3.0.0")

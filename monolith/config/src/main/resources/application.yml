@@ -42,3 +42,8 @@ localdb:
   postgres:
     driver:
       enabled: true
+
+riot:
+  api:
+    url: https://eun1.api.riotgames.com/
+    token: XXXXXX

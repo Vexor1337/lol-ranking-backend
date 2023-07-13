@@ -24,11 +24,14 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+    implementation(project(":monolith:commons:arrow"))
     implementation(project(":monolith:ranking:ports-input"))
     implementation(project(":monolith:ranking:ports-output"))
 
     implementation("org.mapstruct:mapstruct:1.5.3.Final")
     kapt("org.mapstruct:mapstruct-processor:1.5.3.Final")
+
+    implementation(group = "io.arrow-kt", name = "arrow-core", version = "1.0.1")
 
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
