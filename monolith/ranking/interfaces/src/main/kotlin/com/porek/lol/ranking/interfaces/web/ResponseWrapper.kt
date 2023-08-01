@@ -12,7 +12,6 @@ class ResponseWrapper<T>(val data: T) {
         }
     }
 }
-
 fun <T> response(result: T, status:HttpStatus) =
     ResponseEntity(ResponseWrapper(result), status)
 

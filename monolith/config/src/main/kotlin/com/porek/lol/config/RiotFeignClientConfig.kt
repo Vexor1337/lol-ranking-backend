@@ -11,8 +11,9 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class RiotFeignClientConfig {
     @Bean
-    fun createLolRankingFeignClient(@Value("\${riot.api.url}") url: String): RiotFeignClient {
+    fun createLolRankingFeignClient(@Value("\${riot.api.url}") url: String, @Value("\${riot.api.token}") riotApiToken: String): RiotFeignClient {
         return Feign.builder()
+            .requestInterceptor(FeignClientInterceptor(riotApiToken))
             .decoder(GsonDecoder())
             .encoder(GsonEncoder())
             .target(RiotFeignClient::class.java, url)

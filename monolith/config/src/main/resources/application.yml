@@ -46,4 +46,4 @@ localdb:
 riot:
   api:
     url: https://eun1.api.riotgames.com/
-    token: XXXXXX
+    token: "XXX"

@@ -1,9 +1,9 @@
 package com.porek.lol.ranking.application
 
-import arrow.core.getOrElse
+import arrow.core.Either
 import com.porek.lol.ranking.application.mapper.Mapper
-import com.porek.lol.ranking.ports.input.Player
-import com.porek.lol.ranking.ports.input.SummonerProjection
+import com.porek.lol.ranking.application.mapper.RiotFeignClientErrorMapper
+import com.porek.lol.ranking.ports.input.*
 import com.porek.lol.ranking.ports.input.service.RankingService
 import com.porek.lol.ranking.ports.output.clients.RiotClient
 import com.porek.lol.ranking.ports.output.repository.PlayersRepository
@@ -20,8 +20,10 @@ class RankingServiceImpl(
         return playersRepository.getAllPlayersFromDb().map { mapper.playerDtoToInput(it) }
     }
 
-    override fun getPlayerRankFromApiBySummonerName(summonerName: String): SummonerProjection {
-        val summonerRankInfo = riotClient.getPlayerRankFromApiBySummonerName(summonerName).getOrElse { error("xdddd") }
-        return mapper.summonerDtoToProjection(summonerRankInfo)
+    override fun getPlayerRankFromApiBySummonerName(summonerName: String): Either<LolRanksAppError, SummonerProjection> {
+        val summonerRankInfo = riotClient.getPlayerRankFromApiBySummonerName(summonerName)
+        return summonerRankInfo.mapLeft { error ->
+                RiotFeignClientErrorMapper.mapError(error)
+        }.map { mapper.summonerDtoToProjection(it) }
     }
 }

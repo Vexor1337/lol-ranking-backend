@@ -4,7 +4,6 @@ plugins {
     id("org.springframework.boot") version "3.1.1"
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.8.22"
-    kotlin("plugin.spring") version "1.8.22"
 }
 
 group = "com.porek"
@@ -19,18 +18,11 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-
-
-    implementation(project(":monolith:ranking:ports-input"))
-    implementation(project(":monolith:commons:arrow"))
-
     implementation(group = "io.arrow-kt", name = "arrow-core", version = "1.0.1")
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
-    runtimeOnly("org.postgresql:postgresql")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation(group = "org.amshove.kluent", name="kluent", version="1.68")
 }
 
 tasks.withType<KotlinCompile> {

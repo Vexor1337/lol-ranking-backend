@@ -1,5 +1,6 @@
 package com.porek.lol.ranking.interfaces
 
+import arrow.core.Either
 import com.porek.lol.ranking.interfaces.web.Response
 import com.porek.lol.ranking.interfaces.web.toResponse
 import com.porek.lol.ranking.ports.input.Player
@@ -21,6 +22,9 @@ class LolRanksController(private val rankingService: RankingService) {
 
     @GetMapping("/getPlayerRankFromApiBySummonerName/")
     fun getPlayerRankFromApiBySummonerName(@RequestParam summonerName: String) : Response<SummonerProjection>{
-        return rankingService.getPlayerRankFromApiBySummonerName(summonerName).toResponse()
+        return when(val result = rankingService.getPlayerRankFromApiBySummonerName(summonerName)){
+            is Either.Right -> result.value.toResponse()
+            is Either.Left -> throw result.value.toException()
+        }
     }
 }
